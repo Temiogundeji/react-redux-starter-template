@@ -10,13 +10,9 @@ import logger from 'redux-logger';
 import reducers from './reducers';
 import ReduxPromise from 'redux-promise';
 
-const store = createStore(
-    reducers,
-    applyMiddleware(logger, ReduxPromise)
-);
 
 ReactDOM.render(
-    <Provider store={store}>
+    <Provider>
         <App />
     </Provider>
     , document.getElementById('root'));
