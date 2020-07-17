@@ -2,32 +2,50 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
+import { Router, Route, Switch, Redirect } from 'react-router-dom';
+
+import Home from "./HomePage/HomePage";
+import Login  from "./LoginPage/LoginPage";
+import Register from "./RegisterPage/RegistrationPage";
+
+import history from "./helpers/history";
+import PrivateRoute from "./PrivateRoute";
 import { connect } from 'react-redux';
-import { defaultFunction } from './actions';
+import { alertActions } from './actions/alert-action';
 
 class App extends Component {
+  constructor(props){
+    super(props);
 
-  componentDidMount() {
-    // call default function to display redux operation
-    this.props.defaultFunction();
+    history.listen(( location, action ) => {
+      this.props.clearAlerts();
+    });
   }
-
   render() {
     return (
       <div>
-        React Redux Starter Template
+        {
+          alert.message &&
+         <div className={`alert ${alert.type}`}>{alert.message}</div>
+        }
+        <Router history = {history}>
+          <PrivateRoute exact path="/" component={Home} />
+          <Route path="/login" component={Login} />
+          <Route path="/register" component={Register} />
+        </Router>
       </div>
     );
   }
 }
 
-// function to convert the global state obtained from redux to local props
-function mapStateToProps(state) {
-  return {
-    default: state.default
-  };
+const mapStateToProps = state => {
+  const { alert } = state;
+  return { alert };
 }
 
-export default connect(mapStateToProps, { defaultFunction })(App);
+const actionCreators = {
+  clearAlerts: alertActions.clear
+}
 
-
+const connectedApp = connect(mapStateToProps, actionCreators)(App);
+export default connectedApp;

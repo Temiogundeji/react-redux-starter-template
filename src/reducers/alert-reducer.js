@@ -1,6 +1,6 @@
 import { alertConstants } from '../constants/alert-constant';
 
-export const alert = (state = {}, action) => {
+const alertReducer = (state = {}, action) => {
     switch(action.type){
         case alertConstants.SUCCESS:
             return {
@@ -18,3 +18,5 @@ export const alert = (state = {}, action) => {
             return state;
     }
 }
+
+export default alertReducer;

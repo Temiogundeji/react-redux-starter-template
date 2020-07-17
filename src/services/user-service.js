@@ -1,5 +1,5 @@
 const user = require("../../../models/user");
-
+const authHeader = require('../helpers/auth-header');
 export const userService = {
     login,
     logout,

@@ -1,10 +1,15 @@
-import { userConstants } from '../constants';
 import userService from '../services/index';
 import { alertActions } from '../actions/alert-action';
 import { userConstants } from '../constants/user-constant';
 import { history } from '../helpers/history';
-import user from '../../../models/user';
+// import user from '../../../models/user';
  
+export const userActions = {
+    login,
+    signup,
+    logout
+}
+
 const login = (username, password) => {
     return dispatch => {
         dispatch(request({ username }));

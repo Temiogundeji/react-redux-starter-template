@@ -11,7 +11,7 @@ function success(message){
 }
 
 function error(message){
-    return { type: alertContants.ERROR, message };
+    return { type: alertConstants.ERROR, message };
 }
 
 function clear(){
